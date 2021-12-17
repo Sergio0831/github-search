@@ -1,7 +1,30 @@
-import React from 'react';
+import React from "react";
+import ReactFC from "react-fusioncharts";
+import FusionCharts from "fusioncharts";
+import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 
-const Bar3D = () => {
-  return <div>chart</div>;
+ReactFC.fcRoot(FusionCharts, FusionTheme);
+
+const Bar3D = ({ data }) => {
+  const chartConfigs = {
+    type: "bar3d",
+    width: "400",
+    height: "400",
+    dataFormat: "json",
+    dataSource: {
+      chart: {
+        caption: "Most Popular",
+        theme: "fusion",
+        yAxisName: "Stars",
+        xAxisName: "Repos",
+        xAxisNameFontSize: "16px",
+        yAxisNameFontSize: "16px"
+      },
+      data
+    }
+  };
+
+  return <ReactFC {...chartConfigs} />;
 };
 
 export default Bar3D;
