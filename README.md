@@ -31,7 +31,7 @@ export default ReactComponent
 [React Icons - Main Docs](https://react-icons.github.io/react-icons/)
 
 ```jsx
-import { FiUsers, FiUserPlus } from 'react-icons/fi';
+import { FiUsers, FiUserPlus } from "react-icons/fi";
 <FiUsers className='nameOfTheClass'> </FiUsers>;
 ```
 

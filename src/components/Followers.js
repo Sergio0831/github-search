@@ -7,22 +7,26 @@ const Followers = () => {
   // const { avatar_url, html_url, login } = githubFollowers;
 
   return (
-    <Wrapper>
-      <div className='followers'>
-        {githubFollowers.map((foll) => {
-          const { id, avatar_url, html_url, login } = foll;
-          return (
-            <article key={id}>
-              <img src={avatar_url} alt={login} />
-              <div>
-                <h4>{login}</h4>
-                <a href={html_url}>{html_url}</a>
-              </div>
-            </article>
-          );
-        })}
-      </div>
-    </Wrapper>
+    <>
+      {githubFollowers.length > 0 && (
+        <Wrapper>
+          <div className='followers'>
+            {githubFollowers.map((foll) => {
+              const { id, avatar_url, html_url, login } = foll;
+              return (
+                <article key={id}>
+                  <img src={avatar_url} alt={login} />
+                  <div>
+                    <h4>{login}</h4>
+                    <a href={html_url}>{html_url}</a>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </Wrapper>
+      )}
+    </>
   );
 };
 
