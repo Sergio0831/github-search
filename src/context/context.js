@@ -24,31 +24,27 @@ const GithubProvider = ({ children }) => {
     );
     if (response) {
       setGithubUser(response.data);
-      getFollowers(user);
-      getRepos(user);
+      const { login, followers_url } = response.data;
+      await Promise.allSettled([
+        axios(`${rootUrl}/users/${login}/repos?per_page=100`),
+        axios(`${followers_url}?per_page=100`)
+      ])
+        .then((results) => {
+          const [repos, followers] = results;
+          const status = "fulfilled";
+          if (repos.status === status) {
+            setGithubRepos(repos.value.data);
+          }
+          if (followers.status === status) {
+            setGithubFollowers(followers.value.data);
+          }
+        })
+        .catch((err) => console.log(err));
     } else {
       toggleError(true, "There is no user with that username");
     }
     checkReguests();
     setIsLoading(false);
-  };
-
-  const getFollowers = async (user) => {
-    const response = await axios(`${rootUrl}/users/${user}/followers`).catch(
-      (err) => console.log(err)
-    );
-    if (response) {
-      setGithubFollowers(response.data);
-    }
-  };
-
-  const getRepos = async (user) => {
-    const response = await axios(
-      `${rootUrl}/users/${user}/repos?per_page=100`
-    ).catch((err) => console.log(err));
-    if (response) {
-      setGithubRepos(response.data);
-    }
   };
 
   const checkReguests = () => {

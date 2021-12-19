@@ -55,8 +55,8 @@ const Repos = () => {
   forks = Object.values(forks).slice(-5).reverse();
 
   return (
-    <section className='section'>
-      <Wrapper className='section-centre'>
+    <section className='section section-center'>
+      <Wrapper>
         {/* <ExampleChart data={chartData} /> */}
         <Pie3D data={mostUsed} />
         <Column3D data={stars} />
