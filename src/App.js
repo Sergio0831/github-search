@@ -8,19 +8,21 @@ import {
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path='/' exact>
-          <Dashboard></Dashboard>
-        </Route>
-        <Route path='/login'>
-          <Login></Login>
-        </Route>
-        <Route path='*'>
-          <Error />
-        </Route>
-      </Routes>
-    </Router>
+    <AuthWrapper>
+      <Router>
+        <Routes>
+          <PrivateRoute path='/' exact>
+            <Dashboard></Dashboard>
+          </PrivateRoute>
+          <Route path='/login'>
+            <Login></Login>
+          </Route>
+          <Route path='*'>
+            <Error />
+          </Route>
+        </Routes>
+      </Router>
+    </AuthWrapper>
   );
 }
 
